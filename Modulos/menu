@@ -42,7 +42,7 @@ ${comando[1]} > /dev/null 2>&1
 touch $HOME/fim
  ) > /dev/null 2>&1 &
  tput civis
-echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
+echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m#"
@@ -56,26 +56,32 @@ while true; do
    echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 done
 echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+clear
 tput cnorm
 }
 fun_tst () {
-speedtest --share > speed
+speedtest --share --secure > speed
 }
-echo -e "\033[1;37m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "   \033[1;32mTESTANDO A VELOCIDADE DO SERVIDOR !\033[0m"
-echo -e "\033[1;37m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-aguarde 'fun_tst'
+echo -e "\E[38;5;18m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
+echo -e "\E[38;5;18m┃\E[44;1;37m    TESTANDO A VELOCIDADE DO SERVIDOR    \E[0m\E[38;5;18m┃"
+echo -e "\E[38;5;18m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
 echo ""
-png=$(cat speed | sed -n '5 p' |awk -F : {'print $NF'})
+aguarde 'fun_tst'
+clear
+echo -e "\E[38;5;18m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
+echo -e "\E[38;5;18m┃\E[44;1;37m    TESTANDO A VELOCIDADE DO SERVIDOR    \E[0m\E[38;5;18m┃"
+echo -e "\E[38;5;18m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
+echo ""
+png=$(cat speed | sed -n '5 p' |awk -F : {'printf $NF'})
 down=$(cat speed | sed -n '7 p' |awk -F :  {'print $NF'})
 upl=$(cat speed | sed -n '9 p' |awk -F :  {'print $NF'})
 lnk=$(cat speed | sed -n '10 p' |awk {'print $NF'})
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\033[1;32mPING (LATENCIA):\033[1;37m$png"
 echo -e "\033[1;32mDOWNLOAD:\033[1;37m$down"
 echo -e "\033[1;32mUPLOAD:\033[1;37m$upl"
-echo -e "\033[1;32mLINK: \033[1;36m$lnk\033[0m"
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\033[1;32mLINK: \E[38;5;33m$lnk"
+echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 rm -rf $HOME/speed
 }
 #limiter
@@ -139,45 +145,69 @@ function onapp1 () {
    sleep 10
    menu
 }
-function onapp2 () {
-   clear
-   echo -e "\033[1;32mPARANDO O ONLINE APP... \033[0m"
-   echo ""
-   fun_stponlineapp () {
-      sleep 1
-      screen -r -S "onlineapp" -X quit
-      screen -wipe 1>/dev/null 2>/dev/null
-      [[ $(grep -wc "onlineapp" /etc/autostart) != '0' ]] && {
-          sed -i '/onlineapp/d' /etc/autostart
-      }
-      sleep 1
-   }
-   fun_bar 'fun_stponlineapp' 'sleep 3'
-   rm -rf /var/www/html/server >/dev/null 2>&1
-   echo -e "\n\033[1;31m ONLINE APP PARADO !\033[0m"
-   sleep 3
-   menu
+function onapp2() {
+    clear
+    echo -e "\033[1;32mPARANDO O ONLINE APP... \033[0m"
+    echo ""
+    function fun_stponlineapp() {
+    # Stop Apache2 if it is running on port 80
+    if netstat -tulpn | grep -q ':80.*apache2'; then
+        service apache2 stop >/dev/null 2>&1
+        sleep 1
+    fi
+
+    # Stop Apache2 if it is running on port 8888
+    if netstat -tulpn | grep -q ':8888.*apache2'; then
+        service apache2 stop >/dev/null 2>&1
+        sleep 1
+    fi
+
+    # Stop Online App
+    screen_pids=$(pgrep -f "onlineapp")
+    if [ -n "$screen_pids" ]; then
+        for pid in $screen_pids; do
+            kill "$pid"
+            sleep 1
+        done
+        screen -wipe >/dev/null
+    fi
+
+    # Remove Online App from autostart if present
+    [[ $(grep -wc "onlineapp" /etc/autostart) != '0' ]] && {
+        sed -i '/onlineapp/d' /etc/autostart
+    }
 }
-function onapp_ssh () {
-[[ $(ps x | grep "onlineapp"|grep -v grep |wc -l) = '0' ]] && onapp1 || onapp2
+    fun_bar 'fun_stponlineapp' 'sleep 3'
+    rm -rf /var/www/html/server >/dev/null 2>&1
+    echo -e "\n\033[1;31m ONLINE APP PARADO !\033[0m"
+    sleep 3
+    menu
+}
+
+function onapp_ssh() {
+    if pgrep -f "onlineapp" > /dev/null; then
+        onapp2  # Se está rodando, para
+    else
+        onapp1  # Se não está rodando, inicia
+    fi
 }
 ##
 function autoexec () {
    if grep "menu;" /etc/profile > /dev/null; then
       clear
-      echo -e "\033[1;32mDESATIVANDO AUTO EXECUÇÃO\033[0m"
+      echo -e "\033[1;32mDesativando auto execução\033[0m"
       offautmenu () {
          sed -i '/menu;/d' /etc/profile
       }
       echo ""
       fun_bar 'offautmenu'
       echo ""
-      echo -e "\033[1;31mAUTO EXECUÇÃO DESATIVADO!\033[0m"
+      echo -e "\033[1;31mAuto execução desativado!\033[0m"
       sleep 1.5s
       menu2
    else
       clear
-      echo -e "\033[1;32mATIVANDO AUTO EXECUÇÃO\033[0m"
+      echo -e "\033[1;32mAtivando auto execução\033[0m"
       autmenu () {
          grep -v "^menu;" /etc/profile > /tmp/tmpass && mv /tmp/tmpass /etc/profile
          echo "menu;" >> /etc/profile
@@ -185,7 +215,7 @@ function autoexec () {
       echo ""
       fun_bar 'autmenu'
       echo ""
-      echo -e "\033[1;32mAUTO EXECUÇÃO ATIVADO!\033[0m"
+      echo -e "\033[1;32mAuto execução ativado!\033[0m"
       sleep 1.5s
       menu2
    fi
