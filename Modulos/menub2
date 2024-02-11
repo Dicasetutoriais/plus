@@ -4,7 +4,7 @@
     echo -e "\033[01;31m║\033[0m"
     echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mINSTALAR UDP-CUSTOM \033[0m"
     echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 02 •\033[1;34m]\033[1;37m ➩  \033[1;33mABRIR MENU UDP-CUSTOM \033[0m"
-    echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mINSTALAR UDP-HYSTERIA(Comando Principal: udph) \033[0m"
+    echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mINSTALAR UDP-VOLTSSHX(Comando Principal: udpx) \033[0m"
     echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 04 •\033[1;34m]\033[1;37m ➩  \033[1;33mINSTALAR WIREGUARD \033[0m"
     echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 05 •\033[1;34m]\033[1;37m ➩  \033[1;33mINSTALAR OPENVPN-PRO \033[0m"
     echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 06 •\033[1;34m]\033[1;37m ➩  \033[1;33mINSTALAR WS-EPRO \033[0m"
@@ -29,7 +29,7 @@
 			udp
 			;;
                         3 | 03)
-                        rm -f install.sh; apt-get update -y; apt-get upgrade -y; wget "https://raw.githubusercontent.com/prjkt-nv404/UDP-Hysteria/main/install.sh" -O install.sh >/dev/null 2>&1; chmod 777 install.sh;./install.sh; rm -f install.sh && udph
+                        rm -f install.sh; apt-get update -y; apt-get upgrade -y; wget --no-cache "https://raw.githubusercontent.com/prjkt-nv404/VoltsshX/main/voltx.sh" -O install.sh >/dev/null 2>&1; chmod 777 install.sh;./install.sh; rm -f install.sh
                         ;;
                         4 | 04)
                         bash <(curl -sL https://raw.githubusercontent.com/PhoenixxZ2023/WireGuard/master/wireguard-install.sh)
@@ -38,7 +38,7 @@
                         bash <(curl -sL https://raw.githubusercontent.com/PhoenixxZ2023/OpenVPN/master/openvpn-install.sh)
                         ;;
                         6 | 06)
-                        bash <(curl -sL https://raw.githubusercontent.com/PhoenixxZ2023//ws-epro/main/Netcolvip.bin)
+                        bash <(curl -sL https://raw.githubusercontent.com//PhoenixxZ2023/ws-epro/main/install.sh)
                         ;;
 			7 | 07)
                         GoLang.sh
