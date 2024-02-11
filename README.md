@@ -36,7 +36,10 @@
 * O idioma padrão é o Português
 
 # Entrar e definir como Usuário root usar comando abaixo:
-🎮 sudo -i
+
+````
+sudo -i
+````
 
 # ALTERAR SENHA ROOT VPS...
 
