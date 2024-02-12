@@ -1480,14 +1480,8 @@ exit 0' >$RCLOCAL
 	fun_socks() {
 		clear
 		echo -e "\033[01;31m╔════════════════════════════════╗\033[0m"
-		echo -e "\033[01;31m║\033[0m\E[44;1;37m        ★  WEB PROXY-SOCKS  ★         \E[0m\033[01;31m║\033[0m"
+		echo -e "\033[01;31m║\033[0m\E[44;1;37m        ★  WEB SOCKS  ★         \E[0m\033[01;31m║\033[0m"
 		echo -e "\033[01;31m╠════════════════════════════════╣\033[0m"
-		[[ $(netstat -nplt | grep -wc 'python') != '0' ]] && {
-			sks='\033[1;32mON'
-			echo -e "\033[1;33mPORTAS\033[1;37m: \033[1;32m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
-		} || {
-			sks='\033[1;31mOFF'
-		}
 		[[ $(screen -list | grep -wc 'proxy') != '0' ]] && var_sks1="\033[1;32m◉" || var_sks1="\033[1;31m○"
 		[[ $(screen -list | grep -wc 'ws') != '0' ]] && var_sks2="\033[1;32m◉" || var_sks2="\033[1;31m○"
 		[[ $(screen -list | grep -wc 'novoWS') != '0' ]] && var_sks3="\033[1;32m◉" || var_sks3="\033[1;31m○"
