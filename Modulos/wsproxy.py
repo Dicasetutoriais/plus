@@ -9,7 +9,7 @@ import sys
 import time
 import getopt
 
-MSG = 'WebSocket'
+MSG = ''
 COR = '<font color="null">'
 FTAG = '</font>'
 MSx = 'WEBSOCKET-SECURITY'
