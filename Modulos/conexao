@@ -1725,6 +1725,8 @@ elif [[ "$resposta" = '4' ]]; then
         echo -e "\033[1;32mEXEMPLO :\033[1;33m80 ou 8080\033"
         echo ""
         read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m: ")" porta
+        echo ""
+	read -p "$(echo -e "\033[1;32mQUAL MENSAGEM PARA STATUS? \033[1;37m: ")" -e -i proxydt
         [[ -z "$porta" ]] && {
             echo ""
             echo -e "\033[1;31mPorta invalida!"
@@ -1734,7 +1736,7 @@ elif [[ "$resposta" = '4' ]]; then
         verif_ptrs $porta
         fun_iniproxydt() {
             sleep 1
-            screen -dmS proxydt /etc/SSHPlus/proxydt --port $porta --http --openvpn-port --response PROXYDT
+            screen -dmS proxydt /etc/SSHPlus/proxydt --port $porta --http --openvpn-port --response 
             [[ $(grep -wc "proxydt" /etc/autostart) = '0' ]] && {
                 echo -e "netstat -tlpn | grep -w $porta > /dev/null || {  screen -r -S 'proxydt' -X quit;  screen -dmS proxydt /etc/SSHPlus/proxydt --port $porta --http --openvpn-port --response PROXY; }" >>/etc/autostart
             } || {
