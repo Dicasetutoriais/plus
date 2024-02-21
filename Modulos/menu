@@ -494,7 +494,7 @@ case "$x" in
    ;;
    14)
    clear
-   speedtestvps.sh
+   speed.sh
    ;;
    15)
    clear
