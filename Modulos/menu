@@ -60,7 +60,7 @@ clear
 tput cnorm
 }
 fun_tst () {
-speedtest --share --secure > speed
+speedtest --share > speed
 }
 echo -e "\E[38;5;18m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
 echo -e "\E[38;5;18m┃\E[44;1;37m    TESTANDO A VELOCIDADE DO SERVIDOR    \E[0m\E[38;5;18m┃"
