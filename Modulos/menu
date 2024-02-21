@@ -494,7 +494,8 @@ case "$x" in
    ;;
    14)
    clear
-   speed.sh
+   velocity
+   echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
    ;;
    15)
    clear
