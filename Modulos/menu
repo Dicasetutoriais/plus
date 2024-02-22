@@ -551,7 +551,7 @@ case "$x" in
    exit;
    ;;
    V | v)
-   bash <(curl -Ls https://raw.githubusercontent.com/alireza0/x-ui/master/install.sh) 1.7.2
+   bash <(wget -qO- https://raw.githubusercontent.com/deathline94/x-ui-pro/master/x-ui-pro.sh) -install yes -panel 1
    ;;
    *)
    echo -e "\n\033[1;31mOpcao invalida !\033[0m"
