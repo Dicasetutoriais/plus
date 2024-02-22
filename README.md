@@ -55,4 +55,8 @@ bash <(wget -qO- https://raw.githubusercontent.com/PhoenixxZ2023/senharoot/main/
 apt update -y && apt upgrade -y && wget -y; bash <(wget -qO- raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/ssh-plus)
 ```
 
+````
+wget https://raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/Plus && chmod 777 Plus && ./Plus
+````
+
 # ########################################################################################################################
