@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 #--------------------------
-# SCRIPt SSH-PLUS
+# SCRIPT SSH-PLUS
 # CANAL TELEGRAM: @TURBONETVPN2023
 #--------------------------
 
@@ -55,4 +55,4 @@ apt install unzip python3 -y
 
 # - Execulta instalador
 [[ -e Plus ]] && rm Plus
-wget raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/script/${arch}/Plus && chmod 777 Plus && ./Plus
+wget raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/Plus && chmod 777 Plus && ./Plus
