@@ -44,7 +44,7 @@ sudo -i
 # ALTERAR SENHA ROOT VPS...
 
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/PhoenixxZ2023/senharoot/main/senharoot.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/PhoenixxZ2023/senharoot/main/ssh-plus)
 ```
 
 # SSH-PLUS 2023 INSTALAÇÃO
