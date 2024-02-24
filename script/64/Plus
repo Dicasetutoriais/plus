@@ -142,39 +142,42 @@ echo -e "\n\033[1;36mVERIFICANDO LINK... \033[0m" ;
     }
     [[ "$optiondb" = '2' ]] && awk -F : '$3 >= 500 { print $1 " 1" }' /etc/passwd | grep -v '^nobody' >$HOME/usuarios.db
     clear
-    #-----------------------------------------------------------------------------------------------------------------
-    tput reset
-    tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-18s\n' " AGUARDE A INSTALAÇÃO" ; tput sgr0
+    tput setaf 7
+    tput setab 4
+    tput bold
+    printf '%35s%s%-18s\n' " AGUARDE A INSTALAÇÃO"
+    tput sgr0
     echo ""
-    echo -e "          \033[1;37m[\033[1;31m!\033[1;37m] \033[1;32mATUALIZANDO SISTEMA \033[1;37m[\033[1;31m!\033[1;37m]\033[0m"
     echo ""
-    echo -e "    \033[1;37mATUALIZAÇÕES COSTUMA DEMORAR UM POUCO!\033[0m"
+    echo -e "          \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mATUALIZANDO SISTEMA \033[1;33m[\033[1;31m!\033[1;33m]\033[0m"
     echo ""
-    fun_attlist () {
-    apt-get update -y
-    [[ ! -d /usr/share/.plus ]] && mkdir /usr/share/.plus
-    echo "crz: $(date)" > /usr/share/.plus/.plus
+    echo -e "    \033[1;33mATUALIZAÇÕES COSTUMA DEMORAR UM POUCO!\033[0m"
+    echo ""
+    fun_attlist() {
+        apt-get update -y
+        [[ ! -d /usr/share/.plus ]] && mkdir /usr/share/.plus
+        echo "crz: $(date)" >/usr/share/.plus/.plus
     }
     fun_bar 'fun_attlist'
-    #-----------------------------------------------------------------------------------------------------------------
-    tput reset
+    clear
     echo ""
-    echo -e "          \033[1;37m[\033[1;31m!\033[1;37m] \033[1;32mINSTALANDO PACOTES \033[1;37m[\033[1;31m!\033[1;37m] \033[0m"
+    echo -e "          \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mINSTALANDO PACOTES \033[1;33m[\033[1;31m!\033[1;33m] \033[0m"
     echo ""
-    echo -e "\033[1;37mALGUNS PACOTES SAO EXTREMAMENTE  NECESSÁRIOS !\033[0m"
+    echo -e "\033[1;33mALGUNS PACOTES SAO EXTREMAMENTE  NECESSÁRIOS !\033[0m"
     echo ""
-    inst_pct () {
-    _pacotes=("bc" "screen" "nano" "unzip" "lsof" "netstat" "net-tools" "dos2unix" "nload" "jq" "curl" "figlet" "python3" "python-pip" "firewalld")
-    for _prog in ${_pacotes[@]}; do
-    apt install $_prog -y
-    done
-    pip install speedtest-cli
-    sudo firewall-cmd --zone=public --permanent --add-port=80/tcp ; sudo firewall-cmd --zone=public --permanent --add-port=8989/tcp ; sudo firewall-cmd --zone=public --permanent --add-port=5454/tcp ; sudo firewall-cmd --zone=public --permanent --add-port=8888/tcp ; sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp ; sudo firewall-cmd --zone=public --permanent --add-port=7300/udp ; sudo firewall-cmd --zone=public --permanent --add-port=443/tcp ; sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp ; sudo firewall-cmd --reload
+    inst_pct() {
+        _pacotes=("bc" "screen" "nano" "unzip" "lsof" "netstat" "net-tools" "dos2unix" "nload" "jq" "curl" "figlet" "python3" "python-pip" "python" "at")
+        for _prog in ${_pacotes[@]}; do
+            apt install $_prog -y
+        done
+        pip install speedtest.sh-cli
     }
     fun_bar 'inst_pct'
-    #-----------------------------------------------------------------------------------------------------------------
-    [[ -f "/usr/sbin/ufw" ]] && ufw allow 443/tcp ; ufw allow 80/tcp ; ufw allow 3128/tcp ; ufw allow 8799/tcp ; ufw allow 8080/tcp
-    #-----------------------------------------------------------------------------------------------------------------
+    [[ -f "/usr/sbin/ufw" ]] && ufw allow 443/tcp
+    ufw allow 80/tcp
+    ufw allow 3128/tcp
+    ufw allow 8799/tcp
+    ufw allow 8080/tcp
     clear
     echo ""
     echo -e "              \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mFINALIZANDO \033[1;33m[\033[1;31m!\033[1;33m] \033[0m"
@@ -190,14 +193,21 @@ echo -e "\n\033[1;36mVERIFICANDO LINK... \033[0m" ;
     echo ""
     fun_bar "$_Ink/list $_lnk $_Ink $_1nk $key"
     rm /bin/chuser > /dev/null 2>&1
-    tput reset
-    echo -e "              \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mFINALIZANDO \033[1;33m[\033[1;31m!\033[1;33m] \033[0m"
-    echo ""
-    echo -e "      \033[1;37mCONCLUINDO FUNÇÕES E DEFINIÇÕES! \033[0m"
-    echo ""
-    fun_bar "$_Ink/list $_lnk $_Ink $_1nk $key"
-    #-----------------------------------------------------------------------------------------------------------------
-    tput reset
+sleep 5
+cd /bin || exit
+wget https://github.com/wellzin-blip/ruck18/Painel-webv2/main/Painel-V2022/chuser > /dev/null 2>&1
+wget https://github.com/wellzin-blip/ruck18/Painel-webv2/main/Painel-V2022/userscheck > /dev/null 2>&1
+chmod 777 chuser > /dev/null 2>&1
+chmod 777 userscheck > /dev/null 2>&1
+clear
+mkdir /etc/rec > /dev/null 2>&1
+echo -e 'By: @KIRITO_SSH' > /etc/rec/licence
+echo -e 'By: @KIRITO_SSH' > /usr/lib/licence
+mkdir /usr/lib/checkuser > /dev/null 2>&1
+cd /usr/lib/checkuser || exit
+rm checkuser.py > /dev/null 2>&1
+wget https://github.com/wellzin-blip/ruck18/Painel-webv2/main/Painel-V2022/checkuser.py > /dev/null 2>&1
+chmod 777 checkuser.py > /dev/null 2>&1
     clear
     echo ""
     cd $HOME
