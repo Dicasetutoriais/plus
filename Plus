@@ -1,5 +1,8 @@
-#!/bin/bash
-clear
+echo ""#!/bin/bash
+tput reset
+echo -e "\033[1;31mnão instalem no momento to arrumando ele ate uns 5 dia corrijo ele"
+echo -e "apos 10 s continua a instalação porem pode esta bugado em algumas opcoes"
+sleep 10
 [[ "$(whoami)" != "root" ]] && {
     echo -e "\033[1;33m[\033[1;31mErro\033[1;33m] \033[1;37m- \033[1;33mvocê precisa executar como root\033[0m"
     rm $HOME/Plus >/dev/null 2>&1
@@ -91,7 +94,7 @@ tput reset; exit 1
 }
 tput reset
 echo -e "\033[0;34m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
-echo -e "\033[0;34m┃\E[41;1;37m             ⇱ SSHPLUS PRO ⇲             \E[0m\033[0;34m┃"
+echo -e "\033[0;34m┃\E[41;1;37m             ⇱ SSHPLUS MANAGER nzx ⇲             \E[0m\033[0;34m┃"
 echo -e "\033[0;34m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
 echo ""          
 echo -e "             \033[1;31mATENCAO! \033[1;37mESSE SCRIPT IRA !\033[0m"
@@ -103,11 +106,11 @@ echo -e "\033[1;32m• \033[1;32mDICA! \033[1;37mULTILIZE O TEMA DARK EM SEU TER
 echo -e "\033[1;37m  UMA MELHOR EXPERIÊNCIA E VISUALIZACAO DO MESMO!\033[0m"
 echo ""   
 echo -e "\033[0;34m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
-echo -e "\033[0;34m┃\033[1;37m               by:@TURBONET2023               \E[0m\033[0;34m┃"
+echo -e "\033[0;34m┃\033[1;37m               by:@Niltonjuniornzx               \E[0m\033[0;34m┃"
 echo -e "\033[0;34m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"           
 echo ""
 #-----------------------------------------------------------------------------------------------------------------
-echo -e "\n\033[1;36mVERIFICANDO LINK... \033[0m" ;
+echo -ne "\033[38;5;118mENTER \033[1;37mpara continuar a \033[1;31mINSTALACAO\033[0m"; read x
 [[ $x = @(n|N) ]] && exit
 sed -i 's/Port 22222/Port 22/g' /etc/ssh/sshd_config  > /dev/null 2>&1
 service ssh restart  > /dev/null 2>&1;
@@ -226,4 +229,4 @@ echo -e ""
 echo -e "             \033[1;37m • \033[1;32mINSTALAÇÃO CONCLUÍDA\033[1;37m • \033[0m"
 echo -e ""
 echo -e "\033[1;31m \033[1;37mCOMANDO PRINCIPAL: \033[1;32mmenu\033[0m"
-echo -e "\033[1;37m MAIS INFORMACOES \033[1;31m(\033[1;36mTELEGRAM\033[1;31m): \033[1;37m@TURBONET2023\033[0m"
+echo -e "\033[1;37m MAIS INFORMACOES \033[1;31m(\033[1;36mTELEGRAM\033[1;31m): \033[1;37m@VEM_BRABO\033[0m"
