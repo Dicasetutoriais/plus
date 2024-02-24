@@ -63,5 +63,5 @@
 			esac
 		done
 	}
-	fun_conexao
+	menub2
 }
