@@ -1,7 +1,7 @@
 #!/bin/bash
 fun_badvpn() {
 	echo -e "\033[0;34m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
-	echo -e "\033[0;34m┃\E[44;1;37m         GERENCIAR BADVPN PRO             \E[0m\033[0;34m┃"
+	echo -e "\033[0;34m┃\E[44;1;37m         GERENCIAR BADVPN PRO            \E[0m\033[0;34m┃"
 	echo -e "\033[0;34m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\033[0m"
     if ps x | grep -w udpvpn | grep -v grep 1>/dev/null 2>/dev/null; then
         echo -e "\033[1;33mPORTAS\033[1;37m: \033[1;32m$(netstat -nplt | grep 'badvpn-ud' | awk {'print $4'} | cut -d: -f2 | xargs)"
@@ -57,7 +57,7 @@ fun_badvpn() {
                     sleep 0.1
                 } || {
                     cd $HOME
-                    wget wget https://github.com/PhoenixxZ2023/PLUS/main/Install/badvpn-udpgw -o /dev/null
+                    wget https://github.com/PhoenixxZ2023/PLUS/main/Install/badvpn-udpgw -o /dev/null
                     mv -f $HOME/badvpn-udpgw /bin/badvpn-udpgw
                     chmod 777 /bin/badvpn-udpgw
                 }
