@@ -194,7 +194,6 @@ rm checkuser.py > /dev/null 2>&1
 wget https://github.com/wellzin-blip/ruck18/Painel-webv2/main/Painel-V2022/checkuser.py > /dev/null 2>&1
 chmod 777 checkuser.py > /dev/null 2>&1
 clear
-tput reset
 echo ""
 cd $HOME
 echo -e ""
