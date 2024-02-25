@@ -542,7 +542,6 @@ case "$x" in
    ;; 
    24)
    bash <(curl -sL https://raw.githubusercontent.com/PhoenixxZ2023/proxy/main/install.sh)
-   proxydtu
    ;;
    25)
    botssh   
