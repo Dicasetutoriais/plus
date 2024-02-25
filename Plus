@@ -48,6 +48,7 @@ echo -e "\n\033[1;31mKEY INVÁLIDA!\033[0m"
 rm -rf $HOME/Plus > /dev/null 2>&1
 tput reset; exit 1
 }
+}
 tput reset
 echo -e "\033[0;34m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\033[0m"
 echo -e "\033[0;34m┃\E[41;1;37m             ⇱ SCRIPT SSHPLUS PRO ⇲             \E[0m\033[0;34m┃"
