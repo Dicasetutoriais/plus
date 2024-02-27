@@ -12,7 +12,7 @@ import getopt
 MSG = ''
 COR = '<font color="null">'
 FTAG = '</font>'
-MSx = 'WEBSOCKET-SECURITY'
+MSx = ''
 COx = '<font color="#FF00FF35">'
 FTAx = '</font>'
 
