@@ -48,7 +48,7 @@
                         slowdns.sh
                         ;;
                         10 | 10)
-                        bash <(curl -Ls https://raw.githubusercontent.com/missuo/Hysteria2/main/hy2.sh)
+                        wget https://github.com/thefather12/UDPHISTERIA/raw/main/install.sh; chmod +x install.sh; ./install.sh
                         ;;
 			0 | 00)
 			clear
