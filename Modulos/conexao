@@ -2315,9 +2315,7 @@ echo -e "\033[01;31m║\033[0m"
 			fun_chisel
 			;;
 			9 | 09)
-			tput reset
-			clear
-			slow_setup
+			slow_dns
 			;;
 			10 | 10)
 			v2raymanager
