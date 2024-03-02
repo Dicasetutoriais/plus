@@ -358,50 +358,38 @@ case "$x" in
    sleep 2
 esac
 }
-while true $x != "ok"
-do
-stsl=$(ps x | grep "limiter"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
-stson=$(ps x | grep "onlineapp"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
-stsu=$(ps x | grep "udpvpn"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
-stsbot=$(ps x | grep "bot_plus"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
-if [[ "$(grep -c "Ubuntu" /etc/issue.net)" = "1" ]]; then
-system=$(cut -d' ' -f1 /etc/issue.net)
-system+=$(echo ' ')
-system+=$(cut -d' ' -f2 /etc/issue.net |awk -F "." '{print $1}')
-elif [[ "$(grep -c "Debian" /etc/issue.net)" = "1" ]]; then
-system=$(cut -d' ' -f1 /etc/issue.net)
-system+=$(echo ' ')
-system+=$(cut -d' ' -f3 /etc/issue.net)
-else
-system=$(cut -d' ' -f1 /etc/issue.net)
-fi
-_ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/SSHPlus/Exp)" != "" ]] && _expuser=$(cat /etc/SSHPlus/Exp) || _expuser="0"
-[[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
-[[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
-_onli=$(($_ons + $_onop + $_ondrp))
-_ram=$(printf ' %-9s' "$(free -h | grep -i mem | awk {'print $2'})")
-_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
-_usop=$(printf '%-5s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
-_core=$(printf '%-5s' "$(grep -c cpu[0-9] /proc/stat)")
-_system=$(printf '%-10s' "$system")
-_hora=$(printf '%(%H:%M:%S)T')
-_onlin=$(printf '%-5s' "$_onli")
-_userexp=$(printf '%-5s' "$_expuser")
-_tuser=$(printf '%-5s' "$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)")
-[[ -e /etc/Plus-torrent ]] && stsf=$(echo -e "\033[1;32m(ON ◉ ") || stsf=$(echo -e "\033[1;31m(OFF ○ ") 
-stsbot=$(ps x | grep "bot_plus"|grep -v grep > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")
-stsbotteste=$(ps x | grep "bot_teste"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON ◉ " || echo -e "\033[1;31m(OFF ○ ")
-stsl=$(ps x | grep "limiter"|grep -v grep > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")
-stsu=$(ps x | grep "udpvpn"|grep -v grep > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")
-stson=$(ps x | grep "onlineapp"|grep -v grep > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")
-stsom=$(ps x | grep "shutdown -r 16:00"|grep -v grep > /dev/null && echo -e "\033[1;32m(ON ◉) " || echo -e "\033[1;31m(OFF ○) ")
-autm=$(grep "menu;" /etc/profile > /dev/null && echo -e "\033[1;32m(ON ◉) " || echo -e "\033[1;31m(OFF ○)")
-swap1=$(printf '%-5s' "$(free -h | grep -i swap | awk {'print $2'})")
-swap2=$(printf '%-5s' "$(free -h | grep -i swap | awk {'print $4'})")
-swap3=$(printf '%-5s' "$(free -h | grep -i swap | awk {'print $3'})")
+while [ "$x" != "ok" ]; do
+    stsl=$(pgrep limiter > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
+    stson=$(pgrep onlineapp > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
+    stsu=$(pgrep udpvpn > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
+    stsbot=$(pgrep bot_plus > /dev/null && echo -e "\033[1;32m(ON◉) " || echo -e "\033[1;31m(OFF) ")
+    
+    # Add other status checks here
+
+    system=$(awk '{print $1}' /etc/issue.net)
+    if [ "$system" == "Ubuntu" ]; then
+        system+=" $(awk '{print $2}' /etc/issue.net | awk -F "." '{print $1}')"
+    elif [ "$system" == "Debian" ]; then
+        system+=" $(awk '{print $3}' /etc/issue.net)"
+    fi
+
+    # Add other system information gathering here
+
+    echo "System: $_system"
+    echo "RAM: $_ram"
+    echo "Users: $_tuser"
+    echo "Online: $_onlin"
+    echo "Exp Users: $_expuser"
+    echo "CPU Usage: $_usop"
+    echo "Cores: $_core"
+    echo "Time: $_hora"
+    echo "Swap: Total: $swap1 | Used: $swap3 | Free: $swap2"
+    echo "--------------------------------------"
+
+    sleep 5
+done
 clear
-echo -e "\033[1;37mSEU IP 👉 \033[38;5;82m$IP           \033[1;36mTELEGRAM 😎\033 \033[1;37m @TURBONET2023"
+echo -e "\033[1;37mSEU IP 👉 \033[38;5;82m$IP            \033[1;36mTELEGRAM 😎\033 \033[1;37m @TURBONET2023"
 echo -e "\033[0;34m╔══════════════════════════════════════════════════════════╗\033[0m"
 echo -e "\033[0;34m║\E[46;1;37m                   TURBONET_SSH_SCRIPT_PRO                \E[0m\033[0;34m║"
 echo -e "\033[0;34m╠══════════════════════════════════════════════════════════╣\033[0m"
