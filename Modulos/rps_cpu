@@ -21,11 +21,17 @@ echo never > /sys/kernel/mm/transparent_hugepage/enabled
 # Instala o pacote htop
 sudo apt install htop -y
 
-# Define a afinidade da CPU para o processo com PID 1234
-taskset -c 0 -p 1234
+# Encontra o PID do processo com base no nome
+pid=$(pgrep -f "nome_do_processo")
 
-# Limita o uso da CPU pelo processo com PID 1234 a 50%
-cpulimit -p 1234 -l 50
+# Verifica se o PID foi encontrado
+if [ -n "$pid" ]; then
+    # Define a afinidade da CPU para o processo encontrado
+    taskset -c 0 -p $pid
+
+    # Limita o uso da CPU pelo processo encontrado a 50%
+    cpulimit -p $pid -l 50
+fi
 
 # Atualiza o sistema
 sudo apt update && sudo apt upgrade -y
@@ -36,4 +42,3 @@ sudo apt install linux-tools-common -y
 # Analisa o uso da CPU com perf
 perf record -a -g -- sleep 30
 perf report
-
