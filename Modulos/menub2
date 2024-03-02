@@ -18,8 +18,6 @@
     echo -e "\033[01;34m╠══════════════════════════════════════════════════╝\033[0m"
 			tput civis
 			echo -ne "\033[1;31m╰━━━━━━━━❪\033[1;32mSELECIONE UMA OPÇÃO\033[1;33m\033[1;31m\033[1;37m":; read x
-			tput cnorm
-			clear
 			case $x in
 			1 | 01)
 			clear
