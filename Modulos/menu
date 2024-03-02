@@ -86,42 +86,77 @@ rm -rf $HOME/speed
 }
 
 #limiter
-function limit1 () {
-   clear
-   echo -e "\n\033[1;32mINICIANDO O LIMITER... \033[0m"
-   echo ""
-   fun_bar 'screen -dmS limiter limiter' 'sleep 3'
-   [[ $(grep -wc "limiter" /etc/autostart) = '0' ]] && {
-       echo -e "ps x | grep 'limiter' | grep -v 'grep' && echo 'ON' || screen -dmS limiter limiter" >> /etc/autostart
-   } || {
-       sed -i '/limiter/d' /etc/autostart
-	   echo -e "ps x | grep 'limiter' | grep -v 'grep' && echo 'ON' || screen -dmS limiter limiter" >> /etc/autostart
-   }
-   echo -e "\n\033[1;32m  LIMITER ATIVO !\033[0m"
-   sleep 3
-   menu
+function limit1() {
+    clear
+    echo -e "\n\033[1;32mINICIANDO O LIMITER... \033[0m"
+    echo ""
+    fun_bar 'screen -dmS limiter limiter' 'sleep 3'
+    if ! grep -q "limiter" /etc/autostart; then
+        echo -e "ps x | grep 'limiter' | grep -v 'grep' && echo 'ON' || screen -dmS limiter limiter" >> /etc/autostart
+    else
+        sed -i '/limiter/d' /etc/autostart
+        echo -e "ps x | grep 'limiter' | grep -v 'grep' && echo 'ON' || screen -dmS limiter limiter" >> /etc/autostart
+    fi
+    echo -e "\n\033[1;32m  LIMITER ATIVO !\033[0m"
+    sleep 3
+    menu
 }
-function limit2 () {
-   clear
-   echo -e "\033[1;32mPARANDO O LIMITER... \033[0m"
-   echo ""
-   fun_stplimiter () {
-      sleep 1
-      screen -r -S "limiter" -X quit
-      screen -wipe 1>/dev/null 2>/dev/null
-      [[ $(grep -wc "limiter" /etc/autostart) != '0' ]] && {
-          sed -i '/limiter/d' /etc/autostart
-      }
-      sleep 1
-   }
-   fun_bar 'fun_stplimiter' 'sleep 3'
-   echo -e "\n\033[1;31m LIMITER PARADO !\033[0m"
-   sleep 3
-   menu
+
+function limit2() {
+    clear
+    echo -e "\033[1;32mPARANDO O LIMITER... \033[0m"
+    echo ""
+    fun_stplimiter() {
+        sleep 1
+        screen -r -S "limiter" -X quit
+        screen -wipe 1>/dev/null 2>/dev/null
+        if grep -q "limiter" /etc/autostart; then
+            sed -i '/limiter/d' /etc/autostart
+        fi
+        sleep 1
+    }
+    fun_bar 'fun_stplimiter' 'sleep 3'
+    echo -e "\n\033[1;31m LIMITER PARADO !\033[0m"
+    sleep 3
+    menu
 }
-function limit_ssh () {
-[[ $(ps x | grep "limiter"|grep -v grep |wc -l) = '0' ]] && limit1 || limit2
+
+function limit_ssh() {
+    if ps x | grep -q "limiter" | grep -v "grep"; then
+        limit2
+    else
+        limit1
+    fi
 }
+
+# Função temporária apenas para simular a barra de progresso
+function fun_bar() {
+    local _max=$1
+    local _delay=$2
+    for ((i=0; i<_max; i++)); do
+        echo -ne "\rProgresso: $i/$_max"
+        sleep $_delay
+    done
+    echo -e "\nConcluído!"
+}
+
+function menu() {
+    clear
+    echo "Menu:"
+    echo "1. Iniciar limiter"
+    echo "2. Parar limiter"
+    echo "3. Sair"
+    read -p "Escolha uma opção: " option
+    case $option in
+        1) limit_ssh ;;
+        2) limit2 ;;
+        3) exit ;;
+        *) echo "Opção inválida. Tente novamente." ;;
+    esac
+}
+
+menu
+
 #onlineapp
 function onapp1 () {
    clear
