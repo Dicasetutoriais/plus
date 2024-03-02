@@ -1,44 +1,16 @@
 #!/bin/bash
 
-# Calcula o número de CPUs e converte para hexadecimal
-CPUS_HEX=$(echo "obase=16;2^$(nproc)-1" | bc)
+# Set the hexadecimal value of the number of CPUs to the rps_cpus file of the eth0 network interface's receive queue
+echo "obase=16;2^$(nproc)-1" | bc > /sys/class/net/eth0/queues/rx-0/rps_cpus
 
-# Define o valor hexadecimal no arquivo rps_cpus da interface de rede eth0
-echo $CPUS_HEX > /sys/class/net/eth0/queues/rx-0/rps_cpus
-
-# Define o tamanho da hash para 16384 no módulo nf_conntrack
+# Set the hashsize parameter of the nf_conntrack module to 16384
 echo 16384 > /sys/module/nf_conntrack/parameters/hashsize
 
-# Define o número de flow IDs por fila de recebimento para 16384 na interface eth0
+# Set the number of flow IDs allocated per receive queue to 16384 for the eth0 interface
 echo 16384 > /sys/class/net/eth0/queues/rx-0/rps_flow_cnt
 
-# Define o Timestamp Counter (TSC) como a fonte de relógio atual para o sistema
+# Set the Timestamp Counter (TSC) as the current clock source for the system
 echo tsc > /sys/devices/system/clocksource/clocksource0/current_clocksource
 
-# Desativa as páginas transparentes enormes (THP) nas configurações de gerenciamento de memória do kernel
+# Disable transparent huge pages (THP) in the kernel's memory management settings
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
-
-# Instala o pacote htop
-sudo apt install htop -y
-
-# Encontra o PID do processo com base no nome
-pid=$(pgrep -f "nome_do_processo")
-
-# Verifica se o PID foi encontrado
-if [ -n "$pid" ]; then
-    # Define a afinidade da CPU para o processo encontrado
-    taskset -c 0 -p $pid
-
-    # Limita o uso da CPU pelo processo encontrado a 50%
-    cpulimit -p $pid -l 50
-fi
-
-# Atualiza o sistema
-sudo apt update && sudo apt upgrade -y
-
-# Instala o pacote perf
-sudo apt install linux-tools-common -y
-
-# Analisa o uso da CPU com perf
-perf record -a -g -- sleep 30
-perf report
