@@ -1287,9 +1287,9 @@ SCOLOR='\033[0m'
 			# Adquirindo easy-rsa
 			echo ""
 			fun_dep() {
-				wget -O ~/EasyRSA-3.1.1.tgz "https://raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/Install/EasyRSA-3.0.9.tgz"
-				[[ ! -e $HOME/EasyRSA-3.1.1.tgz ]] && {
-					wget -O ~/EasyRSA-3.1.1.tgz "https://raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/Install/EasyRSA-3.0.9.tgz"
+				wget -O ~/EasyRSA-3.0.9.tgz "https://raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/Install/EasyRSA-3.0.9.tgz"
+				[[ ! -e $HOME/EasyRSA-3.0.9.tgz ]] && {
+					wget -O ~/EasyRSA-3.0.9.tgz "https://raw.githubusercontent.com/PhoenixxZ2023/PLUS/main/Install/EasyRSA-3.0.9.tgz"
 				}
 				tar xzf ~/EasyRSA-3.0.9.tgz -C ~/
 				mv ~/EasyRSA-3.0.9/ /etc/openvpn/
