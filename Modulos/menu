@@ -547,7 +547,7 @@ case "$x" in
    exit;
    ;;
    V | v)
-   bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+   bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh)   
    ;;
    *)
    echo -e "\n\033[1;31mOpcao invalida !\033[0m"
