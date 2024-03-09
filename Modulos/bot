@@ -22,9 +22,9 @@ ShellBot.username
 fun_menu() {
     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
         local env_msg
-env_msg="╔═════════•⊱✦⊰•═════════╗\n"
-        env_msg+="<b>             BOT-SSHPLUS PRO</b>\n"
-        env_msg+="╚═════════•⊱✦⊰•═════════╝\n\n"
+env_msg="╔══════════•⊱✦⊰•══════════╗\n"
+        env_msg+="<b>               BOT-SSHPLUS PRO</b>\n"
+        env_msg+="╚══════════•⊱✦⊰•══════════╝\n\n"
         env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard1" \
@@ -38,9 +38,9 @@ env_msg="╔═════════•⊱✦⊰•════════�
     }
     if [[ "$(grep -w "${message_from_username}" $ativos | grep -wc 'revenda')" != '0' ]]; then
         local env_msg
-env_msg="╔═══════•⊱✦⊰•═══════╗\n"
-        env_msg+="<b>          BOT SSHPLUS PRO</b>\n"
-        env_msg+="╚═══════•⊱✦⊰•═══════╝\n\n"
+env_msg="╔════════•⊱✦⊰•════════╗\n"
+        env_msg+="<b>           BOT SSHPLUS PRO</b>\n"
+        env_msg+="╚════════•⊱✦⊰•════════╝\n\n"
         env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard2" \
@@ -48,9 +48,9 @@ env_msg="╔═══════•⊱✦⊰•═══════╗\n"
         return 0
     elif [[ "$(grep -w "${message_from_username}" $ativos | grep -wc 'subrevenda')" != '0' ]]; then
         local env_msg
-env_msg="╔═══════•⊱✦⊰•═══════╗\n"
-        env_msg+="<b>          BOT SSHPLUS PRO</b>\n"
-        env_msg+="╚═══════•⊱✦⊰•═══════╝\n\n"
+env_msg="╔════════•⊱✦⊰•════════╗\n"
+        env_msg+="<b>           BOT SSHPLUS PRO</b>\n"
+        env_msg+="╚════════•⊱✦⊰•════════╝\n\n"
         env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard3" \
@@ -73,9 +73,9 @@ fun_ajuda() {
     }
     if [[ "$id_chatuser" = "$id_admin" ]]; then
         local env_msg
-env_msg="╔═════════•⊱✦⊰•═════════╗\n"
-        env_msg+="<b>              BOT SSHPLUS PRO</b>\n"
-        env_msg+="╚═════════•⊱✦⊰•═════════╝\n\n"
+env_msg="╔══════════•⊱✦⊰•══════════╗\n"
+        env_msg+="<b>               BOT SSHPLUS PRO</b>\n"
+        env_msg+="╚══════════•⊱✦⊰•══════════╝\n\n"
         env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Exibe menu\n"
         env_msg+="[<b>02</b>] /info = Exibe informacoes\n"
