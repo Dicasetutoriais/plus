@@ -330,8 +330,7 @@ case "$x" in
    menu
    ;;
    A|AA)
-   clear
-   auto-reboot.sh
+   autoreboot.sh
    ;;
    0|00)
    echo -e "\033[1;31mSaindo...\033[0m"
