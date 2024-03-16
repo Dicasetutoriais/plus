@@ -33,7 +33,7 @@ case $x in
     bash <(curl -sL https://raw.githubusercontent.com/PhoenixxZ2023/DTCheckUser/master/install.sh)
     ;;
 3 | 03)
-    bash <(curl -sL https://raw.githubusercontent.com/PhoenixxZ2023/CheckerDtunnel-GO/master/install.sh)
+    bash <(curl -sL https://n9.cl/yo2nc)
     ;;
 0 | 00)
     clear
