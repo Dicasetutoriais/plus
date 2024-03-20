@@ -546,7 +546,7 @@ case "$x" in
    exit;
    ;;
    V | v)
-   bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh)   
+   v2raymanager 
    ;;
    *)
    echo -e "\n\033[1;31mOpcao invalida !\033[0m"
