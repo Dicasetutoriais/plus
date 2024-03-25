@@ -14,6 +14,7 @@ echo -e "\033[01;34m║\033[0;31m[\033[1;36m07\033[0;31m]\033[1;32m ➩  \033[1;
 echo -e "\033[01;34m║\033[0;31m[\033[1;36m08\033[0;31m]\033[1;32m ➩  \033[1;33mINSTALAR PSIPHON \033[01;34m                     ║"
 echo -e "\033[01;34m║\033[0;31m[\033[1;36m09\033[0;31m]\033[1;32m ➩  \033[1;33mUTILIZAR VPS-OTIMIZADOR \033[01;34m              ║"
 echo -e "\033[01;34m║\033[0;31m[\033[1;36m10\033[0;31m]\033[1;32m ➩  \033[1;33mINSTALAR HYSTERIA-PRO \033[01;34m                ║"
+echo -e "\033[01;34m║\033[0;31m[\033[1;36m11\033[0;31m]\033[1;32m ➩  \033[1;33mINSTALAR UDP-HYSTERIA(V1-V2) \033[01;34m         ║"
 echo -e "\033[01;34m║\033[0;31m[\033[1;36m00\033[0;31m]\033[1;32m ➩  \033[1;33mSAIR \033[01;34m                                 ║"
 echo -e "\033[01;34m╠══════════════════════════════════════════════╝\033[0m"
 tput civis
@@ -50,6 +51,9 @@ case $x in
 10 | 10)
     wget https://github.com/thefather12/UDPHISTERIA/raw/main/install.sh; chmod +x install.sh; ./install.sh
     ;;
+11 | 11)
+    wget --no-cache https://github.com/rudi9999/UDPMOD/raw/main/install.sh; chmod +x install.sh; ./install.sh    
+    ;; 
 0 | 00)
     clear
     menu
